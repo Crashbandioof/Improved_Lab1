@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>310</width>
+    <height>246</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QLabel" name="label_vote_menu">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>10</y>
+      <x>130</x>
+      <y>0</y>
       <width>61</width>
       <height>16</height>
      </rect>
@@ -30,7 +30,7 @@
    <widget class="QPushButton" name="pushButton_vote">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>40</x>
       <y>40</y>
       <width>56</width>
       <height>17</height>
@@ -43,7 +43,7 @@
    <widget class="QPushButton" name="pushButton_exit">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>220</x>
       <y>40</y>
       <width>56</width>
       <height>17</height>
@@ -56,7 +56,7 @@
    <widget class="QRadioButton" name="radioButton_John">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>40</x>
       <y>80</y>
       <width>62</width>
       <height>14</height>
@@ -69,7 +69,7 @@
    <widget class="QRadioButton" name="radioButton_Jane">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>220</x>
       <y>80</y>
       <width>62</width>
       <height>14</height>
@@ -82,7 +82,7 @@
    <widget class="QLabel" name="label_voting_results">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>60</x>
       <y>160</y>
       <width>211</width>
       <height>16</height>
@@ -95,7 +95,7 @@
    <widget class="QPushButton" name="pushButton_vote_candidate">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>70</x>
       <y>130</y>
       <width>181</width>
       <height>20</height>
@@ -111,7 +111,7 @@
    <widget class="QLabel" name="label_Please_select">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>40</x>
       <y>110</y>
       <width>181</width>
       <height>16</height>
@@ -127,7 +127,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>310</width>
      <height>18</height>
     </rect>
    </property>

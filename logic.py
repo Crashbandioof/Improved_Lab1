@@ -3,7 +3,13 @@ from gui import *
 import csv
 
 class logic(QMainWindow, Ui_MainWindow):
-    def __init__(self):
+    def __init__(self) -> None:
+        '''
+        The function hides the radio buttons and the vote candidate push button,
+        creates the vote variables for both candidates and sets their value based on what's shown in votedata.csv,
+        and maps the buttons functions
+
+        '''
         super().__init__()
         self.setupUi(self)
 
@@ -11,9 +17,9 @@ class logic(QMainWindow, Ui_MainWindow):
         self.radioButton_Jane.hide()
         self.pushButton_vote_candidate.hide()
 
-        self.__john_votes = 0
-        self.__jane_votes = 0
-        self.__vote_list = []
+        self.__john_votes: int = 0
+        self.__jane_votes: int = 0
+        self.__vote_list: list = []
         with open('votedata.csv', 'r') as csvfile:
             content = csv.reader(csvfile, delimiter=',')
             for row in content:
@@ -25,12 +31,19 @@ class logic(QMainWindow, Ui_MainWindow):
         self.pushButton_exit.clicked.connect(lambda: self.exit())
         self.pushButton_vote_candidate.clicked.connect(lambda: self.vote_candidate())
 
-    def show_vote(self):
+    def show_vote(self) -> None:
+        '''
+        Reveals the radio buttons and the vote candidate push button
+        '''
         self.radioButton_John.show()
         self.radioButton_Jane.show()
         self.pushButton_vote_candidate.show()
 
-    def vote_candidate(self):
+    def vote_candidate(self) -> None:
+        '''
+        Increases the vote value of the selected candidate by one
+        If no candidate is selected, the user is asked to select a candidate
+        '''
         if self.radioButton_John.isChecked():
             self.__john_votes += 1
             self.radioButton_John.hide()
@@ -48,7 +61,12 @@ class logic(QMainWindow, Ui_MainWindow):
 
 
 
-    def exit(self):
+    def exit(self) -> None:
+        '''
+        Disables all of the buttons
+        Submits the vote data to the csv file
+        Displays the vote data to the user
+        '''
         self.radioButton_John.hide()
         self.radioButton_Jane.hide()
         self.pushButton_vote_candidate.hide()
@@ -57,12 +75,11 @@ class logic(QMainWindow, Ui_MainWindow):
 
         with open('votedata.csv', 'r') as file:
             reader = csv.reader(file, delimiter=',')
-            self.__data = []
+            self.__data: list = []
             for row in reader:
                 self.__data.append(row)
         self.__data[1][1] = str(self.__john_votes)
         self.__data[2][1] = str(self.__jane_votes)
-        print(self.__data)
         with open('votedata.csv', 'w',newline='') as file:
             content = csv.writer(file, delimiter=',')
             content.writerows(self.__data)
