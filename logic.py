@@ -46,6 +46,8 @@ class logic(QMainWindow, Ui_MainWindow):
         else:
             self.label_Please_select.setText('Please choose a candidate')
 
+
+
     def exit(self):
         self.radioButton_John.hide()
         self.radioButton_Jane.hide()
@@ -58,13 +60,10 @@ class logic(QMainWindow, Ui_MainWindow):
             self.__data = []
             for row in reader:
                 self.__data.append(row)
-                print(row)
-            print(self.__data)
         self.__data[1][1] = str(self.__john_votes)
         self.__data[2][1] = str(self.__jane_votes)
         print(self.__data)
         with open('votedata.csv', 'w',newline='') as file:
             content = csv.writer(file, delimiter=',')
             content.writerows(self.__data)
-        print(self.__data)
         self.label_voting_results.setText(f'John - {self.__john_votes}, Jane - {self.__jane_votes}, Total - {self.__john_votes + self.__jane_votes}')
