@@ -100,7 +100,6 @@ class logic(QMainWindow, Ui_MainWindow):
             return 'ID must only contain numbers'
         with open('ID_list.txt', 'r') as file: #Checks if the user's ID is already in votedata.csv
             for line in file:
-                print(line,'file: ',self.lineEdit_input_ID.text())
                 if self.lineEdit_input_ID.text() == line[0:6]:
                     return 'You already voted'
         if len(self.lineEdit_input_ID.text()) != 6:
