@@ -51,6 +51,7 @@ class logic(QMainWindow, Ui_MainWindow):
         Increases the vote value of the selected candidate by one
         If no candidate is selected, the user is asked to select a candidate
         Submits vote data to votedata.csv
+        Clears vote ID form
         '''
         error: str = self.check_errors()
         if error != 'None':
@@ -79,6 +80,7 @@ class logic(QMainWindow, Ui_MainWindow):
         with open('votedata.csv', 'w',newline='') as file:
             content = csv.writer(file, delimiter=',')
             content.writerows(self.__data)
+        self.lineEdit_input_ID.setText('')
 
     def exit(self) -> None:
         '''
@@ -94,6 +96,9 @@ class logic(QMainWindow, Ui_MainWindow):
 
         self.label_voting_results.setText(f'John - {self.__john_votes}, Jane - {self.__jane_votes}, Total - {self.__john_votes + self.__jane_votes}')
     def check_errors(self) -> str:
+        '''
+        Checks to see if the user ID input is valid
+        '''
         try: #checks to see if ID input is an integer
             int_ID = int(self.lineEdit_input_ID.text())
         except:
