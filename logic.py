@@ -44,20 +44,21 @@ class logic(QMainWindow, Ui_MainWindow):
         Increases the vote value of the selected candidate by one
         If no candidate is selected, the user is asked to select a candidate
         '''
+        self.check_errors()
         if self.radioButton_John.isChecked():
             self.__john_votes += 1
             self.radioButton_John.hide()
             self.radioButton_Jane.hide()
             self.pushButton_vote_candidate.hide()
-            self.label_Please_select.setText('')
+            self.label_error_message.setText('')
         elif self.radioButton_Jane.isChecked():
             self.__jane_votes += 1
             self.radioButton_John.hide()
             self.radioButton_Jane.hide()
             self.pushButton_vote_candidate.hide()
-            self.label_Please_select.setText('')
+            self.label_error_message.setText('')
         else:
-            self.label_Please_select.setText('Please choose a candidate')
+            self.label_error_message.setText('Please choose a candidate')
 
 
 
@@ -84,3 +85,5 @@ class logic(QMainWindow, Ui_MainWindow):
             content = csv.writer(file, delimiter=',')
             content.writerows(self.__data)
         self.label_voting_results.setText(f'John - {self.__john_votes}, Jane - {self.__jane_votes}, Total - {self.__john_votes + self.__jane_votes}')
+    def check_errors(self):
+        
