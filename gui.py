@@ -43,7 +43,7 @@ class Ui_MainWindow(object):
         self.label_error_message.setText("")
         self.label_error_message.setObjectName("label_error_message")
         self.label_input_ID = QtWidgets.QLabel(parent=self.centralwidget)
-        self.label_input_ID.setGeometry(QtCore.QRect(40, 110, 101, 16))
+        self.label_input_ID.setGeometry(QtCore.QRect(40, 110, 121, 16))
         self.label_input_ID.setObjectName("label_input_ID")
         self.lineEdit_input_ID = QtWidgets.QLineEdit(parent=self.centralwidget)
         self.lineEdit_input_ID.setGeometry(QtCore.QRect(160, 110, 113, 20))
@@ -69,7 +69,7 @@ class Ui_MainWindow(object):
         self.radioButton_John.setText(_translate("MainWindow", "John"))
         self.radioButton_Jane.setText(_translate("MainWindow", "Jane"))
         self.pushButton_vote_candidate.setText(_translate("MainWindow", "Vote for selected candidate"))
-        self.label_input_ID.setText(_translate("MainWindow", "Input Voter ID"))
+        self.label_input_ID.setText(_translate("MainWindow", "Input Voter 6-digit ID"))
 
 
 if __name__ == "__main__":

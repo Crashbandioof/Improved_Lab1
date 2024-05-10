@@ -5,10 +5,10 @@ import csv
 class logic(QMainWindow, Ui_MainWindow):
     def __init__(self) -> None:
         '''
-        The function hides the radio buttons and the vote candidate push button,
+        The function hides the radio buttons, the vote candidate push button, and the ID widgets
         creates the vote variables for both candidates and sets their value based on what's shown in votedata.csv,
         and maps the buttons functions
-
+        Sets Error label to red text
         '''
         super().__init__()
         self.setupUi(self)
@@ -33,6 +33,8 @@ class logic(QMainWindow, Ui_MainWindow):
         self.pushButton_exit.clicked.connect(lambda: self.exit())
         self.pushButton_vote_candidate.clicked.connect(lambda: self.vote_candidate())
 
+        self.label_error_message.setStyleSheet("QLabel { color: red; }")
+
     def show_vote(self) -> None:
         '''
         Reveals the radio buttons and the vote candidate push button
@@ -45,39 +47,28 @@ class logic(QMainWindow, Ui_MainWindow):
 
     def vote_candidate(self) -> None:
         '''
+        Displays an error message if the user input is invalid
         Increases the vote value of the selected candidate by one
         If no candidate is selected, the user is asked to select a candidate
+        Submits vote data to votedata.csv
         '''
-        self.check_errors()
+        error: str = self.check_errors()
+        if error != 'None':
+            self.label_error_message.setText(error)
+            return
         if self.radioButton_John.isChecked():
             self.__john_votes += 1
-            self.radioButton_John.hide()
-            self.radioButton_Jane.hide()
-            self.pushButton_vote_candidate.hide()
-            self.label_error_message.setText('')
         elif self.radioButton_Jane.isChecked():
             self.__jane_votes += 1
-            self.radioButton_John.hide()
-            self.radioButton_Jane.hide()
-            self.pushButton_vote_candidate.hide()
-            self.label_error_message.setText('')
-        else:
-            self.label_error_message.setText('Please choose a candidate')
-
-
-
-    def exit(self) -> None:
-        '''
-        Disables all of the buttons
-        Submits the vote data to the csv file
-        Displays the vote data to the user
-        '''
         self.radioButton_John.hide()
         self.radioButton_Jane.hide()
         self.pushButton_vote_candidate.hide()
-        self.pushButton_vote.setEnabled(False)
-        self.pushButton_exit.setEnabled(False)
-
+        self.label_error_message.setText('')
+        self.label_input_ID.hide()
+        self.lineEdit_input_ID.hide()
+        file = open('ID_list.txt', 'a')
+        file.write(f'{self.lineEdit_input_ID.text()}\n')
+        file.close()
         with open('votedata.csv', 'r') as file:
             reader = csv.reader(file, delimiter=',')
             self.__data: list = []
@@ -88,5 +79,34 @@ class logic(QMainWindow, Ui_MainWindow):
         with open('votedata.csv', 'w',newline='') as file:
             content = csv.writer(file, delimiter=',')
             content.writerows(self.__data)
+
+    def exit(self) -> None:
+        '''
+        Disables all of the buttons
+        Displays the vote data to the user
+        '''
+        self.radioButton_John.hide()
+        self.radioButton_Jane.hide()
+        self.pushButton_vote_candidate.hide()
+        self.pushButton_vote.setEnabled(False)
+        self.pushButton_exit.setEnabled(False)
+
+
         self.label_voting_results.setText(f'John - {self.__john_votes}, Jane - {self.__jane_votes}, Total - {self.__john_votes + self.__jane_votes}')
-    def check_errors(self):
+    def check_errors(self) -> str:
+        try: #checks to see if ID input is an integer
+            int_ID = int(self.lineEdit_input_ID.text())
+        except:
+            return 'ID must only contain numbers'
+        with open('ID_list.txt', 'r') as file: #Checks if the user's ID is already in votedata.csv
+            for line in file:
+                print(line,'file: ',self.lineEdit_input_ID.text())
+                if self.lineEdit_input_ID.text() == line[0:6]:
+                    return 'You already voted'
+        if len(self.lineEdit_input_ID.text()) != 6:
+            return 'Your ID must contain 6 numbers'
+        if self.radioButton_John.isChecked() == self.radioButton_Jane.isChecked():
+            return 'You must select a candidate'
+        return 'None'
+
+
