@@ -16,6 +16,8 @@ class logic(QMainWindow, Ui_MainWindow):
         self.radioButton_John.hide()
         self.radioButton_Jane.hide()
         self.pushButton_vote_candidate.hide()
+        self.label_input_ID.hide()
+        self.lineEdit_input_ID.hide()
 
         self.__john_votes: int = 0
         self.__jane_votes: int = 0
@@ -38,6 +40,8 @@ class logic(QMainWindow, Ui_MainWindow):
         self.radioButton_John.show()
         self.radioButton_Jane.show()
         self.pushButton_vote_candidate.show()
+        self.label_input_ID.show()
+        self.lineEdit_input_ID.show()
 
     def vote_candidate(self) -> None:
         '''
@@ -86,4 +90,3 @@ class logic(QMainWindow, Ui_MainWindow):
             content.writerows(self.__data)
         self.label_voting_results.setText(f'John - {self.__john_votes}, Jane - {self.__jane_votes}, Total - {self.__john_votes + self.__jane_votes}')
     def check_errors(self):
-        
